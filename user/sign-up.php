@@ -42,11 +42,26 @@
           </div>
         </div>
 
-
-          <div class="form-floating mb-4">
-            <input type="text" class="form-control" id="password" placeholder="Enter your password">
-            <label for="password" class="ps-4 fw-light">Password</label>
+        <div class="row">
+          <div class="col-7">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="address" placeholder="Enter your address">
+              <label for="address" class="ps-4 fw-light">Address</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="emial" placeholder="Enter your emial">
+              <label for="emial" class="ps-4 fw-light">Email</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="Username" placeholder="Enter your Username">
+              <label for="Username" class="ps-4 fw-light">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="password" placeholder="Enter your password">
+              <label for="password" class="ps-4 fw-light">Password</label>
+            </div>
           </div>
+        </div>
 
           <div class="d-grid">
                 <button class="btn btn-primary">Create account</button>
