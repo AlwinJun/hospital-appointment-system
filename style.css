@@ -1,0 +1,17 @@
+.main-sidebar {
+  width: 190px;
+}
+
+.main-content {
+  margin-left: 195px;
+}
+
+.card-imgs {
+  height: 180px;
+  object-fit: cover;
+  object-position: 0% 20%;
+}
+
+.card-info {
+  font-size: 0.8rem;
+}

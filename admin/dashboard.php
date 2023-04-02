@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
   <div class="row ">
-    <div class="fixed-top fixed-left me-5 d-flex flex-column justify-content-between vh-100 pb-3 bg-primary" style="width: 190px;">
+    <div class="main-sidebar fixed-top fixed-left me-5 d-flex flex-column justify-content-between vh-100 pb-3 bg-primary">
       <div class="row">
         <nav class="navbar mx-2 mt-3 mb-5">
           <a href="#" class="navbar-brand mb-4">
@@ -36,7 +36,7 @@
       </div>
     </div>   <!-- sidebar end -->
     
-    <div class="col p-0 mb-4 overflow-x-hidden"  style="margin-left: 195px;">
+    <div class="main-content col p-0 mb-4 overflow-x-hidden">
       <div class="bg-white p-3 pe-5 mb-5 border border-bottom-1 border-black shadow">
         <div class="d-flex justify-content-end align-items-center">
           <p class="lead fw-bold"><i class="fa-solid fa-user-secret me-2 fs-4"></i>Alwin</p>
@@ -52,10 +52,10 @@
       <section class="row px-4 align-items-center g-4">
         <div class="col-4">
           <div class="card rounded">
-            <img src="../assets/doctor1.jpg" class="card-img-top" alt="..." style="height: 180px; object-fit:cover; object-position:0% 20%;">
+            <img src="../assets/doctor1.jpg" class="card-imgs card-img-top" alt="...">
             <div class="card-body d-flex flex-column align-items-center text-center">
                 <h5 class="card-title text-primary">Dr. Doctor Name</h5>
-                <div class="text-muted mb-3" style="font-size: 14px;">
+                <div class="card-info text-muted mb-3">
                   <p class="card-text">313, Batakil, Pozorrbio, Pangasinan</p>
                   <p class="card-text">doctor@gmail.com</p>
                   <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">Neurologist</p>
@@ -70,10 +70,10 @@
 
         <div class="col-4">
           <div class="card rounded">
-            <img src="../assets/doctor1.jpg" class="card-img-top" alt="..." style="height: 180px; object-fit:cover; object-position:0% 20%;">
+            <img src="../assets/doctor1.jpg" class="card-imgs card-img-top" alt="...">
             <div class="card-body d-flex flex-column align-items-center text-center">
                 <h5 class="card-title text-primary">Dr. Doctor Name</h5>
-                <div class="text-muted mb-3" style="font-size: 14px;">
+                <div class="card-info text-muted mb-3">
                   <p class="card-text">313, Batakil, Pozorrbio, Pangasinan</p>
                   <p class="card-text">doctor@gmail.com</p>
                   <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">Neurologist</p>
@@ -88,10 +88,10 @@
 
         <div class="col-4">
           <div class="card rounded">
-            <img src="../assets/doctor1.jpg" class="card-img-top" alt="..." style="height: 180px; object-fit:cover; object-position:0% 20%;">
+            <img src="../assets/doctor1.jpg" class="card-imgs card-img-top" alt="...">
             <div class="card-body d-flex flex-column align-items-center text-center">
                 <h5 class="card-title text-primary">Dr. Doctor Name</h5>
-                <div class="text-muted mb-3" style="font-size: 14px;">
+                <div class="card-info text-muted mb-3">
                   <p class="card-text">313, Batakil, Pozorrbio, Pangasinan</p>
                   <p class="card-text">doctor@gmail.com</p>
                   <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">Neurologist</p>
@@ -106,10 +106,10 @@
 
         <div class="col-4">
           <div class="card rounded">
-            <img src="../assets/doctor1.jpg" class="card-img-top" alt="..." style="height: 180px; object-fit:cover; object-position:0% 20%;">
+            <img src="../assets/doctor1.jpg" class="card-imgs card-img-top" alt="...">
             <div class="card-body d-flex flex-column align-items-center text-center">
                 <h5 class="card-title text-primary">Dr. Doctor Name</h5>
-                <div class="text-muted mb-3" style="font-size: 14px;">
+                <div class="card-info text-muted mb-3">
                   <p class="card-text">313, Batakil, Pozorrbio, Pangasinan</p>
                   <p class="card-text">doctor@gmail.com</p>
                   <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">Neurologist</p>
