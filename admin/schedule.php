@@ -15,13 +15,13 @@
           <!-- Main sidebar nav -->
           <ul class="navbar-nav fw-semibold">
             <li class="nav-item mb-3">
-              <a href="#" class="nav-link active text-white">Dashboard</a>
+              <a href="dashboard.php" class="nav-link">Dashboard</a>
             </li>
             <li class="nav-item mb-3">
-              <a href="#" class="nav-link text-bg-emphasis">Doctor Schedule</a>
+              <a href="schedule.php" class="nav-link text-bg-emphasis text-white">Doctor Schedule</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link text-bg-emphasis">Patients</a>
+              <a href="patient.php" class="nav-link text-bg-emphasis">Patients</a>
             </li>
           </ul>
         </nav>
@@ -40,8 +40,96 @@
       <div class="bg-white p-3 pe-5 mb-5 border border-bottom-1 border-black shadow">
         <div class="d-flex justify-content-end align-items-center">
           <p class="lead fw-bold"><i class="fa-solid fa-user-secret me-2 fs-4"></i>Alwin</p>
-        </div>
       </div>
+    </div>
+
+    <!-- Schedule table -->
+    <section class="row justify content-between mb-4 mx-3">
+      <div class="col">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Status</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>
+                <button class="btn btn-outline-info rounded-circle">
+                  <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                </button>
+                <button class="btn btn-danger rounded-circle">
+                  <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
+              </button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>@mdo</td>
+              <td>
+                <button><a href="#">Edit</a></button>
+                <button><a href="#">Delete</a></button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td colspan="2">Larry the Bird</td>
+              <td>@twitter</td>
+              <td>@mdo</td>
+              <td>
+                <button><a href="#">Edit</a></button>
+                <button><a href="#">Delete</a></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-3 my-5">
+        <form action="">
+          <!-- <div class="form-floating mb-3 ">
+            <input type="text" class="form-control " id="address" placeholder="Enter your address">
+            <label for="address" class="fw-light">Address</label>
+          </div> -->
+          
+          <div class="mb-4">
+            <select class="form-select form-select-md" aria-label=".form-select-sm example">
+              <option value="Dr.Doctor Alwin" selected>Dr.Doctor Alwin</option>
+              <option value="Doctor 2">Doctor 2</option>
+              <option value="2">Doctor 3</option>
+              <option value="3">4</option>
+            </select>
+          </div>
+          <div class="input-group input-group-md mb-4">
+            <input type="date" class="form-control" id="date" placeholder="Enter the date">
+            <input type="time" class="form-control" id="time" placeholder="Enter the time">
+          </div>
+          <div class="mb-4">
+            <select class="form-select form-select-md" aria-label=".form-select-sm example">
+              <option value="Available" selected>Available</option>
+              <option value="Booked">Booked</option>
+            </select>
+          </div>
+
+          <div class="text-center"><button class="btn btn-success btn-md">Submit</button></div>
+        </form>
+      </div>
+    </section>
     </div>
   </div>
 </div>
+
+<?php include '../inc/footer.php';?>
