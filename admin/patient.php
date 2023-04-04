@@ -11,17 +11,16 @@
                 <p class="">Hospital</p>
             </h1>
           </a>
-        
           <!-- Main sidebar nav -->
           <ul class="navbar-nav fw-semibold">
             <li class="nav-item mb-3">
-              <a href="#" class="nav-link active text-white">Dashboard</a>
+              <a href="dashboard.php" class="nav-link">Dashboard</a>
             </li>
             <li class="nav-item mb-3">
-              <a href="#" class="nav-link text-bg-emphasis">Doctor Schedule</a>
+              <a href="schedule.php" class="nav-link text-bg-emphasis">Doctor Schedule</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link text-bg-emphasis">Patients</a>
+              <a href="patient.php" class="nav-link text-bg-emphasis text-white">Patients</a>
             </li>
           </ul>
         </nav>
@@ -45,3 +44,5 @@
     </div>
   </div>
 </div>
+
+<?php include '../inc/footer.php';?>

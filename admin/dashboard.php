@@ -15,13 +15,13 @@
           <!-- Main sidebar nav -->
           <ul class="navbar-nav fw-semibold">
             <li class="nav-item mb-3">
-              <a href="#" class="nav-link active text-white">Dashboard</a>
+              <a href="dashboard.php" class="nav-link text-bg-emphasis text-white">Dashboard</a>
             </li>
             <li class="nav-item mb-3">
-              <a href="#" class="nav-link text-bg-emphasis">Doctor Schedule</a>
+              <a href="schedule.php" class="nav-link text-bg-emphasis">Doctor Schedule</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link text-bg-emphasis">Patients</a>
+              <a href="patient.php" class="nav-link text-bg-emphasis">Patients</a>
             </li>
           </ul>
         </nav>
@@ -40,13 +40,13 @@
     <div class="main-content col p-0 mb-4 overflow-x-hidden">
       <div class="bg-white p-3 pe-5 mb-5 border border-bottom-1 border-black shadow">
         <div class="d-flex justify-content-end align-items-center">
-          <p class="lead fw-bold"><i class="fa-solid fa-user-secret me-2 fs-4"></i>Alwin</p>
+          <p class="lead fw-bold mb-0"><i class="fa-solid fa-user-secret me-2 fs-4"></i>Alwin</p>
         </div>
       </div>
 
       <div class="mb-3 d-flex px-3">
         <button class="btn btn-primary btn-lg rounded-pill ms-auto">
-          <a href="add-doctor.php" class="text-light fw-semibold fs-6 text-decoration-none"><i class="fa-solid fa-user-plus me-2"></i>Add Doctor</i></a>
+          <a href="doctor-add.php" class="text-light fw-semibold fs-6 text-decoration-none"><i class="fa-solid fa-user-plus me-2"></i>Add Doctor</i></a>
         </button>
       </div>
 
