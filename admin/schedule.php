@@ -70,7 +70,7 @@
                 </button>
                 <button class="btn btn-danger rounded-circle">
                   <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
-              </button>
+                </button>
               </td>
             </tr>
             <tr>
@@ -80,8 +80,12 @@
               <td>@fat</td>
               <td>@mdo</td>
               <td>
-                <button><a href="#">Edit</a></button>
-                <button><a href="#">Delete</a></button>
+                <button class="btn btn-outline-info rounded-circle">
+                  <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                </button>
+                <button class="btn btn-danger rounded-circle">
+                  <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
+                </button>
               </td>
             </tr>
             <tr>
@@ -90,8 +94,12 @@
               <td>@twitter</td>
               <td>@mdo</td>
               <td>
-                <button><a href="#">Edit</a></button>
-                <button><a href="#">Delete</a></button>
+                <button class="btn btn-outline-info rounded-circle">
+                  <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                </button>
+                <button class="btn btn-danger rounded-circle">
+                  <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
+               </button>
               </td>
             </tr>
           </tbody>
