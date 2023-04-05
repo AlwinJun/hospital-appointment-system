@@ -41,6 +41,82 @@
           <p class="lead fw-bold"><i class="fa-solid fa-user-secret me-2 fs-4"></i>Alwin</p>
         </div>
       </div>
+
+      <section class="row mb-4 mx-2">
+        <div class="col">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Address</th>
+                <th scope="col">Doctor</th>
+                <th scope="col">Date-Time</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>19</td>
+                <td>Batakil</td>
+                <td>Doctor 1</td>
+                <td>4/5/2023 - 9:45am</td>
+                <td>Follow up checkup</td>
+                <td>
+                  <button class="btn btn-outline-info rounded-circle">
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                  </button>
+                  <button class="btn btn-danger rounded-circle">
+                    <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>19</td>
+                <td>Batakil</td>
+                <td>Doctor 1</td>
+                <td>4/5/2023 - 9:45am</td>
+                <td>Follow up checkup</td>
+                <td>
+                  <button class="btn btn-outline-info rounded-circle">
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                  </button>
+                  <button class="btn btn-danger rounded-circle">
+                    <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>19</td>
+                <td>Batakil</td>
+                <td>Doctor 1</td>
+                <td>4/5/2023 - 9:45am</td>
+                <td>Follow up checkup</td>
+                <td>
+                  <button class="btn btn-outline-info rounded-circle">
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                  </button>
+                  <button class="btn btn-danger rounded-circle">
+                    <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   </div>
 </div>
