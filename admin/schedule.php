@@ -40,11 +40,11 @@
       <div class="bg-white p-3 pe-5 mb-5 border border-bottom-1 border-black shadow">
         <div class="d-flex justify-content-end align-items-center">
           <p class="lead fw-bold"><i class="fa-solid fa-user-secret me-2 fs-4"></i>Alwin</p>
+        </div>
       </div>
-    </div>
 
     <!-- Schedule table -->
-    <section class="row justify content-between mb-4 mx-3">
+    <section class="row justify content-between mb-4 mx-2">
       <div class="col">
         <table class="table table-striped table-hover">
           <thead>
@@ -108,11 +108,6 @@
 
       <div class="col-3 my-5">
         <form action="">
-          <!-- <div class="form-floating mb-3 ">
-            <input type="text" class="form-control " id="address" placeholder="Enter your address">
-            <label for="address" class="fw-light">Address</label>
-          </div> -->
-          
           <div class="mb-4">
             <select class="form-select form-select-md" aria-label=".form-select-sm example">
               <option value="Dr.Doctor Alwin" selected>Dr.Doctor Alwin</option>
