@@ -1,3 +1,10 @@
+<?php  include '../inc/connection.php';
+
+$sql = "SELECt * FROM doctors";
+$result = $conn->query($sql);
+$row = $result->fetch_all(MYSQLI_ASSOC);
+;?>
+
 <?php  include '../inc/header.php';?>
 
 <div class="container-fluid">
@@ -63,16 +70,18 @@
 
       <!-- Doctor card section -->
       <section class="row px-4 align-items-center g-4">
+        <?php foreach($row as $card): ?>
         <div class="col-4">
           <div class="card rounded">
-            <img src="../assets/doctor1.jpg" class="card-imgs card-img-top" alt="...">
+            <img src=<?php echo $card['image']; ?> class="card-imgs card-img-top" alt="doctor picture">
             <div class="card-body d-flex flex-column align-items-center text-center">
-              <h5 class="card-title text-primary">Dr. Doctor Name</h5>
+              <h5 class="card-title text-primary"><?php echo 'Dr. '.$card['first_name'].' '. $card['last_name']; ?>
+              </h5>
               <div class="card-info text-muted mb-3">
-                <p class="card-text">313, Batakil, Pozorrbio, Pangasinan</p>
-                <p class="card-text">doctor@gmail.com</p>
+                <p class="card-text"><?php echo $card['address']; ?></p>
+                <p class="card-text"><?php echo $card['email']; ?> </p>
                 <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">
-                  Neurologist</p>
+                  <?php echo $card['department']; ?> </p>
               </div>
               <div class="d-flex gap-3">
                 <button class="btn btn-outline-info"><a href="#"><i
@@ -83,69 +92,7 @@
             </div>
           </div>
         </div>
-
-        <div class="col-4">
-          <div class="card rounded">
-            <img src="../assets/doctor1.jpg" class="card-imgs card-img-top" alt="...">
-            <div class="card-body d-flex flex-column align-items-center text-center">
-              <h5 class="card-title text-primary">Dr. Doctor Name</h5>
-              <div class="card-info text-muted mb-3">
-                <p class="card-text">313, Batakil, Pozorrbio, Pangasinan</p>
-                <p class="card-text">doctor@gmail.com</p>
-                <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">
-                  Neurologist</p>
-              </div>
-              <div class="d-flex gap-3">
-                <button class="btn btn-outline-info"><a href="#"><i
-                      class="fa-regular fa-pen-to-square"></i></a></button>
-                <button class="btn btn-danger rounded-circle"><a href="#"><i
-                      class="fa-solid fa-trash text-light"></i></a></button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-4">
-          <div class="card rounded">
-            <img src="../assets/doctor1.jpg" class="card-imgs card-img-top" alt="...">
-            <div class="card-body d-flex flex-column align-items-center text-center">
-              <h5 class="card-title text-primary">Dr. Doctor Name</h5>
-              <div class="card-info text-muted mb-3">
-                <p class="card-text">313, Batakil, Pozorrbio, Pangasinan</p>
-                <p class="card-text">doctor@gmail.com</p>
-                <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">
-                  Neurologist</p>
-              </div>
-              <div class="d-flex gap-3">
-                <button class="btn btn-outline-info"><a href="#"><i
-                      class="fa-regular fa-pen-to-square"></i></a></button>
-                <button class="btn btn-danger rounded-circle"><a href="#"><i
-                      class="fa-solid fa-trash text-light"></i></a></button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-4">
-          <div class="card rounded">
-            <img src="../assets/doctor1.jpg" class="card-imgs card-img-top" alt="...">
-            <div class="card-body d-flex flex-column align-items-center text-center">
-              <h5 class="card-title text-primary">Dr. Doctor Name</h5>
-              <div class="card-info text-muted mb-3">
-                <p class="card-text">313, Batakil, Pozorrbio, Pangasinan</p>
-                <p class="card-text">doctor@gmail.com</p>
-                <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">
-                  Neurologist</p>
-              </div>
-              <div class="d-flex gap-3">
-                <button class="btn btn-outline-info"><a href="#"><i
-                      class="fa-regular fa-pen-to-square"></i></a></button>
-                <button class="btn btn-danger rounded-circle"><a href="#"><i
-                      class="fa-solid fa-trash text-light"></i></a></button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php endforeach ?>
       </section>
     </div>
   </div>
