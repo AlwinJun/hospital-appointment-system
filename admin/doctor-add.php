@@ -11,19 +11,10 @@ if(isset($_POST['submit'])){
   $department = $_POST['department'];
 
   $image = $_FILES['image'];
-
-  print_r($image) ;
   $image_name =  $image['full_path'];
-  echo '<br>';
   $image_tmp = $image['tmp_name'];
-  echo '<br>';
-  print_r($image_name) ;
-  echo '<br>';
-
   $folder = '../assets/'.$image_name;
-  print_r($folder) ;
   move_uploaded_file($image_tmp,$folder);
-
 
   if(!empty($first_name) && !empty($last_name) && !empty($address) && !empty($email)  && !empty($image)){
     $sql = "INSERT INTO doctors(first_name,last_name,address,email,department,image) 
@@ -38,15 +29,15 @@ if(isset($_POST['submit'])){
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>';
       }else{
-        // $_SESSION['message'] = '
-        //   <div class="alert alert-warning py-3 alert-dismissible" role="alert">
-        //     <div>Failed to add new Doctor</div>
-        //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        //   </div>';
-        die($sql . $conn->error);
+        $_SESSION['message'] = '
+          <div class="alert alert-warning py-3 alert-dismissible" role="alert">
+            <div>Failed to add new Doctor</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        // die($sql . $conn->error);
       }
 
-      //header('Location:dashboard.php');
+      header('Location:dashboard.php');
   }else{
      $_SESSION['message'] = '
         <div class="alert alert-warning text-center" role="alert">
@@ -60,19 +51,6 @@ if(isset($_POST['submit'])){
 
 
 ?>
-
-<?php
-    // SQL GET DATA statement
-    $sql = 'SELECT * FROM doctors';
-    $result = mysqli_query($conn, $sql);
-    // Fetch all data in db
-    $rows =  mysqli_fetch_all($result, MYSQLI_ASSOC);
-?>
-
-<?php foreach ($rows as $row) : ?>
-<p><?php echo $row['id']; ?></p>
-<img src="<?php echo $row['image']; ?>"><img>
-<?php endforeach?>
 
 <div class="container-fluid">
   <div class="row">
