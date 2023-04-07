@@ -1,5 +1,4 @@
-<?php  include '../inc/header.php';?>
-
+<?php include '../inc/header.php'; ?>
 <div class="container-fluid">
   <div class="row">
     <div class="col p-2 bg-primary">
@@ -21,7 +20,7 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-6">
-      <form action="doctor-add.php" method="POST" enctype="multipart/form-data"
+      <form action="process.php" method="POST" enctype="multipart/form-data"
         class="py-5 px-4 border border-opacity-50 border-secondary rounded shadow-lg">
         <div class="row justify-content-between align-items-center">
           <div class="col form-floating mb-3">
