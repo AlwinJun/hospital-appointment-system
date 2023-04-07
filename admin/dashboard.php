@@ -1,12 +1,14 @@
-<?php  include '../inc/connection.php';
+<?php
+include '../inc/connection.php';
 
 $sql = "SELECt * FROM doctors";
 $result = $conn->query($sql);
 $row = $result->fetch_all(MYSQLI_ASSOC);
+mysqli_free_result($result);
+$conn->close();
 ;?>
 
 <?php  include '../inc/header.php';?>
-
 <div class="container-fluid">
   <div class="row ">
     <div
@@ -77,6 +79,7 @@ $row = $result->fetch_all(MYSQLI_ASSOC);
             <div class="card-body d-flex flex-column align-items-center text-center">
               <h5 class="card-title text-primary"><?php echo 'Dr. '.$card['first_name'].' '. $card['last_name']; ?>
               </h5>
+              <?php echo $card['id']?>
               <div class="card-info text-muted mb-3">
                 <p class="card-text"><?php echo $card['address']; ?></p>
                 <p class="card-text"><?php echo $card['email']; ?> </p>
@@ -84,15 +87,22 @@ $row = $result->fetch_all(MYSQLI_ASSOC);
                   <?php echo $card['department']; ?> </p>
               </div>
               <div class="d-flex gap-3">
-                <button class="btn btn-outline-info"><a href="#"><i
-                      class="fa-regular fa-pen-to-square"></i></a></button>
-                <button class="btn btn-danger rounded-circle"><a href="#"><i
-                      class="fa-solid fa-trash text-light"></i></a></button>
+                <button class="btn btn-outline-info">
+                  <a href="process.php?id=<?php echo $card['id']?>">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                  </a>
+                </button>
+                <form action="process.php" method="POST">
+                  <input type="hidden" name="delete_id" value="<?php echo $card['id']?>">
+                  <button type="submit" class="btn btn-danger rounded-circle" name="delete">
+                    <i class="fa-solid fa-trash text-light"></i>
+                  </button>
+                </form>
               </div>
             </div>
           </div>
         </div>
-        <?php endforeach ?>
+        <?php endforeach; ?>
       </section>
     </div>
   </div>
