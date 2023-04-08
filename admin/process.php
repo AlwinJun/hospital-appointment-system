@@ -3,7 +3,7 @@
 session_start();
 
     // ===Insert Doctor===
-if(isset($_POST['submit'])){
+if(isset($_POST['submit_doctor'])){
   $first_name = $_POST['first_name'];
   $last_name = $_POST['last_name'];
   $address = $_POST['address'];
@@ -14,9 +14,9 @@ if(isset($_POST['submit'])){
   $image_name =  $image['full_path'];
   $image_tmp = $image['tmp_name'];
   $folder = '../assets/'.$image_name;
-  move_uploaded_file($image_tmp,$folder);
+  move_uploaded_file($image_tmp,$folder);//create a copy of file in assets dir
 
-  if(!empty($first_name) && !empty($last_name) && !empty($address) && !empty($email)  && !empty($image)){
+  if(!empty($first_name) && !empty($last_name) && !empty($address) && !empty($email)  && !empty($department) && !empty($image)){
     $sql = "INSERT INTO doctors(first_name,last_name,address,email,department,image) 
                         VAlUES('$first_name','$last_name','$address','$email','$department','$folder')";
 
@@ -43,7 +43,90 @@ if(isset($_POST['submit'])){
         <div class="alert alert-warning text-center" role="alert">
           Please fill out all input fields!
         </div>';
-    header('Location:doctor-add.php');
+    header('Location:doctor.php');
+  }
+  $conn->close();
+}
+
+  // ===Get Doctor Data===
+if(isset($_GET['id'])){
+  $update_id = $_GET['id'];
+  $sql = "SELECT * FROM doctors WHERE id=$update_id";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  
+  $_SESSION['update_id'] = $update_id;
+  $_SESSION['first_name'] = $row['first_name'];
+  $_SESSION['last_name'] = $row['last_name'];
+  $_SESSION['address'] = $row['address'];
+  $_SESSION['email'] = $row['email'];
+  $_SESSION['department'] = $row['department'];
+  $_SESSION['image'] = $row['image'];
+
+  $_SESSION['update_btn'] = '<button type="submit" class="btn btn-success" name="update_doctor">Update</button>';
+  header('Location:doctor.php');
+
+  mysqli_free_result($result);
+  $conn->close();
+}
+
+  // ===Update Doctor===
+if(isset($_POST['update_doctor'])){
+  $update_id = $_POST['update_id'];
+  $first_name = $_POST['first_name'];
+  $last_name = $_POST['last_name'];
+  $address = $_POST['address'];
+  $email = $_POST['email'];
+  $department = $_POST['department'];
+
+  $image = $_FILES['image'];
+  print_r( $image);
+  $image_name =  $image['full_path'];
+  $image_tmp = $image['tmp_name'];
+  $folder = '';
+
+  //If user didn't update the image
+  if(empty($image_tmp)){ 
+    $folder = $_POST['old_image']; //use the existing image in db
+  }else{
+    $folder = '../assets/'.$image_name;
+    move_uploaded_file($image_tmp,$folder);
+  }
+  
+  if(!empty($first_name) && !empty($last_name) && !empty($address) && !empty($email) && !empty($department)){
+    $sql = "UPDATE doctors SET
+            first_name = '$first_name',
+            last_name = '$last_name',
+            address = '$address',
+            email = '$email',
+            department = '$department',
+            image = '$folder'
+            WHERE id = $update_id";
+
+    $result = $conn->query($sql);
+
+    if($result){
+      $_SESSION['message'] = '
+        <div class="alert alert-success py-3 alert-dismissible" role="alert">
+          <div>Doctor updated successfully</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+    }else{
+      $_SESSION['message'] = '
+        <div class="alert alert-warning py-3 alert-dismissible" role="alert">
+          <div>Oops! Update Failed</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+      // die($sql . $conn->error);
+    }
+
+    header('Location:dashboard.php');
+  }else{
+    $_SESSION['message'] = '
+        <div class="alert alert-warning text-center" role="alert">
+          Update failed.Please fill out all input fields!
+        </div>';
+    header('Location:dashboard.php');
   } 
   $conn->close();
 }
