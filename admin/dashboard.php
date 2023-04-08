@@ -53,7 +53,6 @@ $conn->close();
           <p class="lead fw-bold mb-0"><i class="fa-solid fa-user-secret me-2 fs-4"></i>Alwin</p>
         </div>
       </div>
-
       <!-- doctor add form  message -->
       <?php 
         session_start();
@@ -65,7 +64,7 @@ $conn->close();
 
       <div class="mt-5 mb-3 d-flex px-3">
         <button class="btn btn-primary btn-lg rounded-pill ms-auto">
-          <a href="doctor-add.php" class="text-light fw-semibold fs-6 text-decoration-none"><i
+          <a href="doctor.php" class="text-light fw-semibold fs-6 text-decoration-none"><i
               class="fa-solid fa-user-plus me-2"></i>Add Doctor</i></a>
         </button>
       </div>
@@ -79,7 +78,6 @@ $conn->close();
             <div class="card-body d-flex flex-column align-items-center text-center">
               <h5 class="card-title text-primary"><?php echo 'Dr. '.$card['first_name'].' '. $card['last_name']; ?>
               </h5>
-              <?php echo $card['id']?>
               <div class="card-info text-muted mb-3">
                 <p class="card-text"><?php echo $card['address']; ?></p>
                 <p class="card-text"><?php echo $card['email']; ?> </p>
