@@ -1,6 +1,11 @@
 <?php 
 session_start();
 
+if(!isset($_SESSION['admin_user'])){
+  header('Location:../404.php');
+  exit();
+}
+
 $update_id =   $_SESSION['update_id'] ?? '';
 $first_name = $_SESSION['first_name'] ?? '';
 $last_name = $_SESSION['last_name'] ?? '';

@@ -1,5 +1,14 @@
-<?php  include '../inc/header.php';?>
+<?php 
+session_start();
 
+if(!isset($_SESSION['admin_user'])){
+  header('Location:../404.php');
+  exit();
+}
+
+?>
+
+<?php  include '../inc/header.php';?>
 <div class="container-fluid">
   <div class="row ">
     <div class="fixed-top fixed-left me-5 d-flex flex-column justify-content-between vh-100 pb-3 bg-primary"
@@ -30,9 +39,11 @@
 
       <div class="row">
         <div class="mt-auto text-bg-emphasis fw-semibold text-center">
-          <p>Log-out
-            <span><i class="fa-solid fa-right-to-bracket"></i></span>
-          </p>
+          <form action="process.php" method="POST">
+            <button class="btn" type="submit" name="logout">
+              <span class="text-bg-emphasis fw-semibold">Log-out</span><i class="fa-solid fa-right-to-bracket"></i>
+            </button>
+          </form>
         </div>
       </div>
     </div> <!-- sidebar end -->
@@ -40,7 +51,10 @@
     <div class="col p-0 mb-4 overflow-x-hidden" style="margin-left: 195px;">
       <div class="bg-white p-3 pe-5 mb-5 border border-bottom-1 border-black shadow">
         <div class="d-flex justify-content-end align-items-center">
-          <p class="lead fw-bold"><i class="fa-solid fa-user-secret me-2 fs-4"></i>Alwin</p>
+          <p class="lead fw-bold mb-0">
+            <i class="fa-solid fa-user-secret me-2 fs-4"></i>Admin
+            <?php echo $_SESSION['name'];?>
+          </p>
         </div>
       </div>
 
