@@ -14,13 +14,6 @@ $email = $_SESSION['email'] ?? '';
 $department = $_SESSION['department'] ?? '';
 $image = $_SESSION['image'] ?? '';
 
-unset($_SESSION['update_id']);
-unset($_SESSION['first_name']);
-unset($_SESSION['last_name']);
-unset($_SESSION['address']);
-unset($_SESSION['email']);
-unset($_SESSION['department']);
-unset($_SESSION['image']);
 ?>
 
 <?php include '../inc/header.php'; ?>
@@ -96,5 +89,14 @@ unset($_SESSION['image']);
     </div>
   </div>
 </div>
+<?php 
+unset($_SESSION['update_id']);
+unset($_SESSION['first_name']);
+unset($_SESSION['last_name']);
+unset($_SESSION['address']);
+unset($_SESSION['email']);
+unset($_SESSION['department']);
+unset($_SESSION['image']);
+?>
 
 <?php include '../inc/footer.php';?>
