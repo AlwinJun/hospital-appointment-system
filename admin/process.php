@@ -1,6 +1,7 @@
 <?php include '../inc/connection.php';
 session_start();
 
+// ===Admin Login===
 if(isset($_POST['login_admin'])){
   $admin_user = $_POST['user'];
   $pass = $_POST['pass'];
@@ -9,15 +10,21 @@ if(isset($_POST['login_admin'])){
   $result = $conn->query($sql);
 
   if(mysqli_num_rows($result)==1){ //check if there is a match
-    $_SESSION['username'] = $admin_user;
+    $_SESSION['admin_user'] = $admin_user;
     header("Location: dashboard.php");
     exit();
   }else {
     $_SESSION['error'] = '<p class="lead text-danger text-center">Invalid username or password</p>';
-    header("Location: login.php");
+    header("Location:login.php");
     exit();
   }
   $conn->close();
+}
+// ===Admin Logout===
+if(isset($_POST['logout'])){
+  unset($_SESSION['admin_user']);
+  header("Location: login.php");
+  exit();
 }
 
 

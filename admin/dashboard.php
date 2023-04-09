@@ -1,11 +1,28 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['admin_user'])){
+  header('Location:../404.php');
+  exit();
+}
+
 include '../inc/connection.php';
 
+// Get the admin_users name
+$admin_user = $_SESSION['admin_user'];
+$sql = "SELECT name FROM admin_account WHERE username = '$admin_user'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$name = $row['name'];
+
+// Select all data from doctors table
 $sql = "SELECt * FROM doctors";
 $result = $conn->query($sql);
 $row = $result->fetch_all(MYSQLI_ASSOC);
+
 mysqli_free_result($result);
 $conn->close();
+
 ;?>
 
 <?php  include '../inc/header.php';?>
@@ -38,10 +55,12 @@ $conn->close();
       </div>
 
       <div class="row">
-        <div class="mt-auto text-bg-emphasis fw-semibold text-center">
-          <p>Log-out
-            <span><i class="fa-solid fa-right-to-bracket"></i></span>
-          </p>
+        <div class="mt-auto text-center">
+          <form action="process.php" method="POST">
+            <button class="btn" type="submit" name="logout">
+              <span class="text-bg-emphasis fw-semibold">Log-out</span><i class="fa-solid fa-right-to-bracket"></i>
+            </button>
+          </form>
         </div>
       </div>
     </div> <!-- sidebar end -->
@@ -50,12 +69,13 @@ $conn->close();
     <div class="main-content col p-0 mb-4 overflow-x-hidden">
       <div class="bg-white p-3 pe-5 border border-bottom-1 border-black shadow">
         <div class="d-flex justify-content-end align-items-center">
-          <p class="lead fw-bold mb-0"><i class="fa-solid fa-user-secret me-2 fs-4"></i>Alwin</p>
+          <p class="lead fw-bold mb-0">
+            <i class="fa-solid fa-user-secret me-2 fs-4"></i>Admin <?php echo $name; ?>
+            </php>
         </div>
       </div>
       <!-- doctor add form  message -->
       <?php 
-        session_start();
         if(isset($_SESSION['message'])){
           echo $_SESSION['message'];
           unset($_SESSION['message']);
