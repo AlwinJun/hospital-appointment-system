@@ -1,6 +1,25 @@
 <?php include '../inc/connection.php';
-
 session_start();
+
+if(isset($_POST['login_admin'])){
+  $admin_user = $_POST['user'];
+  $pass = $_POST['pass'];
+
+  $sql = "SELECT * FROM admin_account WHERE username='$admin_user' AND password='$pass'";
+  $result = $conn->query($sql);
+
+  if(mysqli_num_rows($result)==1){ //check if there is a match
+    $_SESSION['username'] = $admin_user;
+    header("Location: dashboard.php");
+    exit();
+  }else {
+    $_SESSION['error'] = '<p class="lead text-danger text-center">Invalid username or password</p>';
+    header("Location: login.php");
+    exit();
+  }
+  $conn->close();
+}
+
 
     // ===Insert Doctor===
 if(isset($_POST['submit_doctor'])){
