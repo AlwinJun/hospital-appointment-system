@@ -5,6 +5,20 @@ if(!isset($_SESSION['admin_user'])){
   header('Location:../404.php');
   exit();
 }
+include '../inc/connection.php';
+
+// Select all data from schedule table
+$sql = "SELECT * FROM schedule";
+$result = $conn->query($sql);
+$row = $result->fetch_all(MYSQLI_ASSOC);
+
+// Select data from schedule table
+$sql = "SELECT DISTINCT CONCAT(first_name,' ',last_name) AS full_name FROM doctors";
+$result = $conn->query($sql);
+$option_row = $result->fetch_all(MYSQLI_ASSOC);
+
+mysqli_free_result($result);
+$conn->close();
 
 ?>
 
@@ -58,6 +72,14 @@ if(!isset($_SESSION['admin_user'])){
         </div>
       </div>
 
+      <!-- doctor add form  message -->
+      <?php 
+        if(isset($_SESSION['message'])){
+          echo $_SESSION['message'];
+          unset($_SESSION['message']);
+        }
+      ?>
+
       <!-- Schedule table -->
       <section class="row justify content-between mb-4 mx-2">
         <div class="col">
@@ -73,76 +95,49 @@ if(!isset($_SESSION['admin_user'])){
               </tr>
             </thead>
             <tbody>
+              <?php foreach($row as $rows): ?>
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
+                <th scope="row"><?php echo $rows['id']; ?></th>
+                <td><?php echo $rows['doctor_name']; ?></td>
+                <td><?php echo $rows['date']; ?></td>
+                <td><?php echo $rows['time']; ?></td>
+                <td><?php echo $rows['status']; ?></td>
                 <td>
-                  <button class="btn btn-outline-info rounded-circle">
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                  </button>
-                  <button class="btn btn-danger rounded-circle">
-                    <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
-                  </button>
+                  <form action="process.php" method="POST">
+                    <input type="hidden" name="delete_id" value="<?php echo $rows['id']?>">
+                    <button class="btn btn-danger rounded-circle" name="delete_sched">
+                      <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
+                    </button>
+                  </form>
                 </td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>@mdo</td>
-                <td>
-                  <button class="btn btn-outline-info rounded-circle">
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                  </button>
-                  <button class="btn btn-danger rounded-circle">
-                    <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-                <td>@mdo</td>
-                <td>
-                  <button class="btn btn-outline-info rounded-circle">
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                  </button>
-                  <button class="btn btn-danger rounded-circle">
-                    <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
-                  </button>
-                </td>
-              </tr>
+              <?php endforeach ?>
             </tbody>
           </table>
         </div>
 
         <div class="col-3 my-5">
-          <form action="">
+          <form action="process.php" method="POST">
             <div class="mb-4">
-              <select class="form-select form-select-md" aria-label=".form-select-sm example">
-                <option value="Dr.Doctor Alwin" selected>Dr.Doctor Alwin</option>
-                <option value="Doctor 2">Doctor 2</option>
-                <option value="2">Doctor 3</option>
-                <option value="3">4</option>
+              <select class="form-select form-select-md" name="doctor_name" aria-label=".form-select-sm example">
+                <?php foreach($option_row as $option):?>
+                <option value="<?php echo $option['full_name']; ?>" selected>Dr.
+                  <?php echo $option['full_name'];?>
+                </option>
+                <?php endforeach; ?>
               </select>
             </div>
             <div class="input-group input-group-md mb-4">
-              <input type="date" class="form-control" id="date" placeholder="Enter the date">
-              <input type="time" class="form-control" id="time" placeholder="Enter the time">
+              <input type="date" class="form-control" id="date" name="date" placeholder="Enter the date">
+              <input type="time" class="form-control" id="time" name="time" placeholder="Enter the time">
             </div>
             <div class="mb-4">
-              <select class="form-select form-select-md" aria-label=".form-select-sm example">
+              <select class="form-select form-select-md" name="status" aria-label=".form-select-sm example">
                 <option value="Available" selected>Available</option>
                 <option value="Booked">Booked</option>
               </select>
             </div>
-
-            <div class="text-center"><button class="btn btn-success btn-md">Submit</button></div>
+            <div class="text-center"><button class="btn btn-success btn-md" name="submit">Submit</button></div>
           </form>
         </div>
       </section>

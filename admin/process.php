@@ -64,12 +64,14 @@ if(isset($_POST['submit_doctor'])){
       }
 
       header('Location:dashboard.php');
+      exit();
   }else{
      $_SESSION['message'] = '
         <div class="alert alert-warning text-center" role="alert">
           Please fill out all input fields!
         </div>';
     header('Location:doctor.php');
+    exit();
   }
   $conn->close();
 }
@@ -91,6 +93,7 @@ if(isset($_GET['id'])){
 
   $_SESSION['update_btn'] = '<button type="submit" class="btn btn-success" name="update_doctor">Update</button>';
   header('Location:doctor.php');
+  exit();
 
   mysqli_free_result($result);
   $conn->close();
@@ -147,12 +150,14 @@ if(isset($_POST['update_doctor'])){
     }
 
     header('Location:dashboard.php');
+    exit();
   }else{
     $_SESSION['message'] = '
         <div class="alert alert-warning text-center" role="alert">
           Update failed.Please fill out all input fields!
         </div>';
     header('Location:dashboard.php');
+    exit();
   } 
   $conn->close();
 }
@@ -165,18 +170,84 @@ if(isset($_POST['delete'])){
   if($result){
     $_SESSION['message'] = '
       <div class="alert alert-success py-3 alert-dismissible" role="alert">
-        <div>Doctor added successfully</div>
+        <div>Doctor deleted successfully</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>';
     }else{
       $_SESSION['message'] = '
         <div class="alert alert-warning py-3 alert-dismissible" role="alert">
-          <div>Failed to add new Doctor</div>
+          <div>Failed to delete record Doctor</div>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>';
       // die($sql . $conn->error);
   }
   header('Location:dashboard.php');
+  exit();
+  $conn->close();
+}
+
+// ===Insert Sched===
+if(isset($_POST['submit'])){
+  $doctor_name = $_POST['doctor_name'];
+  $date = $_POST['date'];
+  $time = $_POST['time'];
+  $status = $_POST['status'];
+
+  if(!empty($doctor_name) && !empty($date) && !empty($time) && !empty($status) ){
+    $sql = "INSERT INTO schedule(doctor_name,date,time,status) 
+                        VAlUES('$doctor_name','$date','$time','$status')";
+
+    $result = $conn->query($sql);
+
+    if($result){
+      $_SESSION['message'] = '
+        <div class="alert alert-success py-3 alert-dismissible" role="alert">
+          <div>Schedule added successfully</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+      }else{
+        $_SESSION['message'] = '
+          <div class="alert alert-warning py-3 alert-dismissible" role="alert">
+            <div>Failed to add new schedule</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        // die($sql . $conn->error);
+      }
+
+      header('Location:schedule.php');
+      exit();
+  }else{
+     $_SESSION['message'] = '
+        <div class="alert alert-warning text-center" role="alert">
+          Please fill out all input fields!
+        </div>';
+    header('Location:schedule.php');
+    exit();
+  }
+  $conn->close();
+}
+
+  // ===Delete sched===
+if(isset($_POST['delete_sched'])){
+  $delete_id = $_POST['delete_id'];
+  $sql = "DELETE FROM schedule WHERE id={$delete_id}";
+  $result =  $conn->query($sql);
+  if($result){
+    $_SESSION['message'] = '
+      <div class="alert alert-success py-3 alert-dismissible" role="alert">
+        <div>Schedule deleted successfully</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+    }else{
+      $_SESSION['message'] = '
+        <div class="alert alert-warning py-3 alert-dismissible" role="alert">
+          <div>Failed to delete schedule</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+      // die($sql . $conn->error);
+  }
+  header('Location:schedule.php');
+  exit();
   $conn->close();
 }
 
