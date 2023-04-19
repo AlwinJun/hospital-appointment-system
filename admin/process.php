@@ -188,14 +188,17 @@ if(isset($_POST['delete'])){
 
 // ===Insert Sched===
 if(isset($_POST['submit'])){
-  $doctor_name = $_POST['doctor_name'];
+  $doctor_name_id = $_POST['doctor_name_id'];
+  $string = "alwin-,1";
+  list($doctor_name, $doctor_id) = explode("-", $doctor_name_id);
+  $doctor_id = intval($doctor_id); // Convert second part to integer using intval()
   $date = $_POST['date'];
   $time = $_POST['time'];
   $status = $_POST['status'];
 
   if(!empty($doctor_name) && !empty($date) && !empty($time) && !empty($status) ){
-    $sql = "INSERT INTO schedule(doctor_name,date,time,status) 
-                        VAlUES('$doctor_name','$date','$time','$status')";
+    $sql = "INSERT INTO schedule(doctor_name,doctor_id,date,time,status) 
+                        VAlUES('$doctor_name','$doctor_id ','$date','$time','$status')";
 
     $result = $conn->query($sql);
 

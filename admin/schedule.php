@@ -13,7 +13,7 @@ $result = $conn->query($sql);
 $row = $result->fetch_all(MYSQLI_ASSOC);
 
 // Select data from schedule table
-$sql = "SELECT DISTINCT CONCAT(first_name,' ',last_name) AS full_name FROM doctors";
+$sql = "SELECT DISTINCT CONCAT(first_name,' ',last_name) AS full_name,id FROM doctors";
 $result = $conn->query($sql);
 $option_row = $result->fetch_all(MYSQLI_ASSOC);
 
@@ -119,9 +119,9 @@ $conn->close();
         <div class="col-3 my-5">
           <form action="process.php" method="POST">
             <div class="mb-4">
-              <select class="form-select form-select-md" name="doctor_name" aria-label=".form-select-sm example">
+              <select class="form-select form-select-md" name="doctor_name_id" aria-label=".form-select-sm example">
                 <?php foreach($option_row as $option):?>
-                <option value="<?php echo $option['full_name']; ?>" selected>Dr.
+                <option value="<?php echo $option['full_name'].'-'.$option['id']; ?>" selected>Dr.
                   <?php echo $option['full_name'];?>
                 </option>
                 <?php endforeach; ?>
@@ -137,6 +137,7 @@ $conn->close();
                 <option value="Booked">Booked</option>
               </select>
             </div>
+
             <div class="text-center"><button class="btn btn-success btn-md" name="submit">Submit</button></div>
           </form>
         </div>
