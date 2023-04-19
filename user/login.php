@@ -6,7 +6,7 @@
       <form action="process.php" method="POST"
         class="py-5 px-4 border border-opacity-50 border-secondary rounded shadow-lg">
         <?php 
-       // session_start();
+          session_start();
           if(isset($_SESSION['message'])){
             echo $_SESSION['message'];
             unset($_SESSION['message']);

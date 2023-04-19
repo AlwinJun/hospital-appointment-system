@@ -5,7 +5,6 @@ if(!isset($_SESSION['admin_user'])){
   header('Location:../404.php');
   exit();
 }
-
 ?>
 
 <?php  include '../inc/header.php';?>
