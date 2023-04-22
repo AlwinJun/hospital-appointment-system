@@ -1,11 +1,9 @@
 <?php
 session_start();
 include '../inc/connection.php';
-
-if(isset($_POST)){
-  $doctor_id = $_POST['doctor_id'];
-  $doctor_name = $_POST['doctor_name'];
-}
+// $doctor_id = $doctor_name = '';
+$doctor_id = $_GET['id'];
+$doctor_name = $_GET['name'];
 // Select all data from schedule table
 $sql = "SELECT * FROM schedule WHERE doctor_id = $doctor_id AND status = 'Available' ORDER BY date,time";
 $result = $conn->query($sql);
@@ -68,6 +66,7 @@ $conn->close();
             <table class="table table-secondary table-striped">
               <thead>
                 <tr>
+                  <th scope="col">#</th>
                   <th scope="col">Date</th>
                   <th scope="col">Time</th>
                   <th scope="col">Action</th>
@@ -76,13 +75,12 @@ $conn->close();
               <tbody>
                 <?php foreach($row as $rows): ?>
                 <tr>
+                  <td><?php echo $rows['id']; ?></td>
                   <td><?php echo date('F j, Y', strtotime($rows['date'])); ?></td>
                   <td><?php echo date('g:i a', strtotime($rows['time'])); ?></td>
                   <td>
-                    <form action="appointment_form.php" method="POST">
-                      <input type="hidden" name="sched_id" value="<?php $rows['id']; ?>">
-                      <button class="btn btn-link" name="get_appointment">Get appointment</button>
-                    </form>
+                    <button class="btn btn-link" name="get_appointment">
+                      <a href="appointment_form.php?id=<?php echo $rows['id']; ?>"> Get appointment</a></button>
                   </td>
                 </tr>
                 <?php endforeach ?>

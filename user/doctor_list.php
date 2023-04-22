@@ -77,13 +77,12 @@ $conn->close();
                 <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">
                   <?php echo $card['department']; ?> </p>
               </div>
-              <form action="doctor_schedule.php" method="POST">
-                <input type="hidden" name="doctor_id" value="<?php echo $card['id']?>">
-                <input type="hidden" name="doctor_name" value="<?php echo $card['first_name'].' '.$card['last_name']?>">
-                <button type="submit" class="btn btn-success rounded-pill px-5" name="get_sched">
+              <button type="submit" class="btn btn-success rounded-pill px-5" name="get_sched">
+                <a class="text-white text-decoration-none"
+                  href="doctor_schedule.php?id=<?php echo $card['id']?>&name=<?php echo $card['first_name'].' '.$card['last_name']?>">
                   See Schedule
-                </button>
-              </form>
+                </a>
+              </button>
             </div>
           </div>
         </div>
