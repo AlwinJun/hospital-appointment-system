@@ -74,13 +74,12 @@ $conn->close();
               <h5 class="card-title text-primary"><?php echo 'Dr. '.$card['first_name'].' '. $card['last_name']; ?>
               </h5>
               <div class="card-info text-muted mb-3">
-                <p class="card-text"><?php echo $card['address']; ?></p>
-                <p class="card-text"><?php echo $card['email']; ?> </p>
                 <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">
                   <?php echo $card['department']; ?> </p>
               </div>
-              <form action="process.php" method="POST">
+              <form action="doctor_schedule.php" method="POST">
                 <input type="hidden" name="doctor_id" value="<?php echo $card['id']?>">
+                <input type="hidden" name="doctor_name" value="<?php echo $card['first_name'].' '.$card['last_name']?>">
                 <button type="submit" class="btn btn-success rounded-pill px-5" name="get_sched">
                   See Schedule
                 </button>
