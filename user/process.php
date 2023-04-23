@@ -50,4 +50,53 @@ if(isset($_POST['login_user'])){
   $conn->close();
 }
 
+// ===INSERT Patient info===
+if(isset($_POST['submit_appointment'])){
+  $sched_id = $_POST['sched_id'];
+  $doctor = $_POST['doctor'];
+  $date = $_POST['date'];
+  $time = $_POST['time'];
+  $first_name = $_POST['first_name'];
+  $last_name = $_POST['last_name'];
+  $age = $_POST['age'];
+  $address = $_POST['address'];
+  $sex = $_POST['sex'];
+  $description = $_POST['description'];
+
+   if(!empty($doctor) && !empty($date) && !empty($time) && !empty($first_name) && !empty($last_name) && !empty($age) && !empty($address) && !empty($sex) && !empty($description) ){
+    $sql = "INSERT INTO patient(first_name,last_name,age,address,sex,doctor,date,time,description) 
+                        VAlUES('$first_name','$last_name ','$age','$address','$sex','$doctor','$date','$time','$description')";
+
+    $result = $conn->query($sql);
+
+    if($result){
+      $sql = "UPDATE `schedule` SET status ='Booked' WHERE id=$sched_id" ;
+      $result = $conn->query($sql);
+      $_SESSION['message'] = '
+        <div class="alert alert-success py-3 alert-dismissible" role="alert">
+          <div>Appointment set</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+      }else{
+        $_SESSION['message'] = '
+          <div class="alert alert-warning py-3 alert-dismissible" role="alert">
+            <div>Failed to set appointments</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        // die($sql . $conn->error);
+      }
+
+      header('Location:doctor_list.php');
+      exit();
+  }else{
+     $_SESSION['message'] = '
+        <div class="alert alert-warning text-center" role="alert">
+          Please fill out all input fields!
+        </div>';
+    header('Location:appointment_form.php');
+    exit();
+  }
+  $conn->close();
+}
+
 ?>
