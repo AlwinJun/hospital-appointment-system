@@ -18,4 +18,4 @@
   <title>Appointment System</title>
 </head>
 
-<body>
+<body class="bg-secondary bg-opacity-10">

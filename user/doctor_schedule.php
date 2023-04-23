@@ -66,7 +66,6 @@ $conn->close();
             <table class="table table-secondary table-striped">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
                   <th scope="col">Date</th>
                   <th scope="col">Time</th>
                   <th scope="col">Action</th>
@@ -75,12 +74,11 @@ $conn->close();
               <tbody>
                 <?php foreach($row as $rows): ?>
                 <tr>
-                  <td><?php echo $rows['id']; ?></td>
                   <td><?php echo date('F j, Y', strtotime($rows['date'])); ?></td>
                   <td><?php echo date('g:i a', strtotime($rows['time'])); ?></td>
                   <td>
                     <button class="btn btn-link" name="get_appointment">
-                      <a href="appointment_form.php?id=<?php echo $rows['id']; ?>"> Get appointment</a></button>
+                      <a href="appointment_form.php?sched_id=<?php echo $rows['id']; ?>"> Get appointment</a></button>
                   </td>
                 </tr>
                 <?php endforeach ?>
