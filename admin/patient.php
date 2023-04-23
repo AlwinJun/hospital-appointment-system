@@ -5,6 +5,16 @@ if(!isset($_SESSION['admin_user'])){
   header('Location:../404.php');
   exit();
 }
+
+include '../inc/connection.php';
+
+// Select all data from patient table
+$sql = "SELECt * FROM patient";
+$result = $conn->query($sql);
+$row = $result->fetch_all(MYSQLI_ASSOC);
+
+mysqli_free_result($result);
+$conn->close();
 ?>
 
 <?php  include '../inc/header.php';?>
@@ -66,6 +76,7 @@ if(!isset($_SESSION['admin_user'])){
                 <th scope="col">Last Name</th>
                 <th scope="col">Age</th>
                 <th scope="col">Address</th>
+                <th scope="col">Sex</th>
                 <th scope="col">Doctor</th>
                 <th scope="col">Date-Time</th>
                 <th scope="col">Description</th>
@@ -73,60 +84,32 @@ if(!isset($_SESSION['admin_user'])){
               </tr>
             </thead>
             <tbody>
+              <?php foreach($row as $rows): ?>
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>19</td>
-                <td>Batakil</td>
-                <td>Doctor 1</td>
-                <td>4/5/2023 - 9:45am</td>
-                <td>Follow up checkup</td>
+                <th scope="row"><?php echo $rows['id']; ?></th>
+                <td><?php echo $rows['first_name']; ?></td>
+                <td><?php echo $rows['last_name']; ?></td>
+                <td><?php echo $rows['age']; ?></td>
+                <td><?php echo $rows['address']; ?></td>
+                <td><?php echo $rows['sex']; ?></td>
+                <td><?php echo $rows['doctor']; ?></td>
                 <td>
+                  <?php echo date('F j, Y', strtotime($rows['date'])).'<br>'.date('g:i a', strtotime($rows['time'])); ?>
+                </td>
+                <td><?php echo $rows['description']; ?></td>
+                <td class="d-flex gap-2">
                   <button class="btn btn-outline-info rounded-circle">
                     <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
                   </button>
-                  <button class="btn btn-danger rounded-circle">
-                    <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
-                  </button>
+                  <form action="process.php" method="POST">
+                    <input type="hidden" name="delete_id" value="<?php echo $rows['id']?>">
+                    <button class="btn btn-danger rounded-circle" name="delete_patient">
+                      <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
+                    </button>
+                  </form>
                 </td>
               </tr>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>19</td>
-                <td>Batakil</td>
-                <td>Doctor 1</td>
-                <td>4/5/2023 - 9:45am</td>
-                <td>Follow up checkup</td>
-                <td>
-                  <button class="btn btn-outline-info rounded-circle">
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                  </button>
-                  <button class="btn btn-danger rounded-circle">
-                    <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>19</td>
-                <td>Batakil</td>
-                <td>Doctor 1</td>
-                <td>4/5/2023 - 9:45am</td>
-                <td>Follow up checkup</td>
-                <td>
-                  <button class="btn btn-outline-info rounded-circle">
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                  </button>
-                  <button class="btn btn-danger rounded-circle">
-                    <a href="#"><i class="fa-solid fa-trash text-light"></i></a>
-                  </button>
-                </td>
-              </tr>
+              <?php endforeach ?>
             </tbody>
           </table>
         </div>
