@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if(!isset($_SESSION['user_name'])){
+  header('Location:../404.php');
+  exit();
+}
+
 include '../inc/connection.php';
 // Get the users_name name
 $user_name = $_SESSION['user_name'];

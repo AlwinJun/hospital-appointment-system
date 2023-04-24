@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if(!isset($_SESSION['user_name'])){
+  header('Location:../404.php');
+  exit();
+}
+
 include '../inc/connection.php';
 
 $sched_id = $_GET['sched_id'];

@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if(!isset($_SESSION['user_name'])){
+  header('Location:../404.php');
+  exit();
+}
+
 include '../inc/connection.php';
 // $doctor_id = $doctor_name = '';
 $doctor_id = $_GET['id'];
@@ -63,7 +69,7 @@ $conn->close();
         <h2 class="my-3">Dr. <?php echo $doctor_name; ?></h2>
         <div class="row ms-5">
           <div class="col-5">
-            <table class="table table-secondary table-striped">
+            <table class="table table-secondary table-striped text-center">
               <thead>
                 <tr>
                   <th scope="col">Date</th>
