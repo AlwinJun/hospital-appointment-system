@@ -83,7 +83,7 @@ $conn->close();
       <!-- Schedule table -->
       <section class="row justify content-between mb-4 mx-2">
         <div class="col">
-          <table class="table table-striped table-hover">
+          <table class="table table-striped table-hover text-center">
             <thead>
               <tr>
                 <th scope="col">#</th>

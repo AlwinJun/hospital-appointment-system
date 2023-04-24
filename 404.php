@@ -4,7 +4,7 @@
     <p class="h1 fw-bold">
       404
     </p>
-    <!-- <p class="lead fw-semibold">Sorry, this page isn't available.</p> -->
+    <p class="lead fw-semibold">Sorry, this page isn't available.</p>
     <p class="lead fw-semibold">Hacker yan?! Mag log-in ka</p>
   </div>
 </div>
