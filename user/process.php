@@ -50,6 +50,12 @@ if(isset($_POST['login_user'])){
   $conn->close();
 }
 
+if(isset($_POST['logout'])){
+  unset($_SESSION['user_name']);
+  header("Location: login.php");
+  exit();
+}
+
 // ===INSERT Patient info===
 if(isset($_POST['submit_appointment'])){
   $sched_id = $_POST['sched_id'];
