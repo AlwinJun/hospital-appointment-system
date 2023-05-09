@@ -15,3 +15,15 @@
 .card-info {
   font-size: 0.8rem;
 }
+
+.welcome-img {
+  margin: 1rem;
+  width: auto;
+  min-height: 200px;
+  background: url('./assets/welcome.jpg') no-repeat 80% 40%;
+  background-size: cover;
+}
+
+.carousel-item img {
+  height: 500px;
+}

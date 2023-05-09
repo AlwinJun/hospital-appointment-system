@@ -5,6 +5,10 @@
     <div class="col-5">
       <form action="process.php" method="POST" autocomplete="off"
         class="py-5 px-4 border border-opacity-50 border-secondary rounded shadow-lg">
+        <div class="text-center">
+          <p class="fs-1 fw-bold text-primary">Welcome Back</p>
+          <p class="fw-light fs-small">Enter your credential to continue</p>
+        </div>
         <?php 
           session_start();
           if(isset($_SESSION['error'])){
