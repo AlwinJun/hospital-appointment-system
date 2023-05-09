@@ -1,12 +1,12 @@
 <?php
 session_start();
-include '../inc/connection.php';
 
 if(!isset($_SESSION['admin_user'])){
   header('Location:../404.php');
   exit();
 }
 
+include '../inc/connection.php';
 // Get the admin_users name
 $admin_user = $_SESSION['admin_user'];
 $sql = "SELECT name FROM admin_account WHERE username = '$admin_user'";
@@ -14,15 +14,28 @@ $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $_SESSION['name'] = $row['name'];
 
-// Select all data from doctors table
-$sql = "SELECt * FROM doctors";
-$result = $conn->query($sql);
-$row = $result->fetch_all(MYSQLI_ASSOC);
 
-mysqli_free_result($result);
-$conn->close();
+$sql = "SELECT COUNT(*) as all_doctors FROM doctors";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$all_doctor = $row["all_doctors"];
 
-;?>
+$sql = "SELECT COUNT(*) as all_patients FROM patient";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$all_patients = $row["all_patients"];
+
+$sql = "SELECT COUNT(*) as booked FROM patient WHERE status = 'Booked'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$book = $row["booked"];
+
+$sql = "SELECT COUNT(*) as cancel FROM patient WHERE status = 'Cancelled'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$cancel = $row["cancel"];
+
+?>
 
 <?php  include '../inc/header.php';?>
 <div class="container-fluid">
@@ -42,6 +55,9 @@ $conn->close();
           <ul class="navbar-nav fw-semibold">
             <li class="nav-item mb-3">
               <a href="dashboard.php" class="nav-link text-bg-emphasis text-white">Dashboard</a>
+            </li>
+            <li class="nav-item mb-3">
+              <a href="doctor-section.php" class="nav-link text-bg-emphasis">Doctor</a>
             </li>
             <li class="nav-item mb-3">
               <a href="schedule.php" class="nav-link text-bg-emphasis">Doctor Schedule</a>
@@ -74,56 +90,64 @@ $conn->close();
           </p>
         </div>
       </div>
-      <!-- doctor add form  message -->
-      <?php 
-        if(isset($_SESSION['message'])){
-          echo $_SESSION['message'];
-          unset($_SESSION['message']);
-        }
-      ?>
 
-      <div class="mt-5 mb-3 d-flex px-3">
-        <button class="btn btn-primary btn-lg rounded-pill ms-auto">
-          <a href="doctor.php" class="text-light fw-semibold fs-6 text-decoration-none"><i
-              class="fa-solid fa-user-plus me-2"></i>Add Doctor</i></a>
-        </button>
+      <div class="welcome-img rounded">
+        <div class="mx-4 py-4">
+          <p class="lead mb-2 fw-semibold">Welcome!</p>
+          <div class="h2 mb-2 fw-bold"> <?php echo $_SESSION['name'];?></div>
+          <p calss="fs-6" style="width: 650px;">
+            As an administrator, you can manage appointments, view patient information, and perform other administrative
+            tasks from this dashboard. Please use the navigation menu on the left to access different sections of the
+            website.
+          </p>
+        </div>
       </div>
 
-      <!-- Doctor card section -->
-      <section class="row px-4 align-items-center g-4">
-        <?php foreach($row as $card): ?>
-        <div class="col-4">
-          <div class="card rounded">
-            <img src=<?php echo $card['image']; ?> class="card-imgs card-img-top" alt="doctor picture">
-            <div class="card-body d-flex flex-column align-items-center text-center">
-              <h5 class="card-title text-primary"><?php echo 'Dr. '.$card['first_name'].' '. $card['last_name']; ?>
-              </h5>
-              <div class="card-info text-muted mb-3">
-                <p class="card-text"><?php echo $card['address']; ?></p>
-                <p class="card-text"><?php echo $card['email']; ?> </p>
-                <p class="card-text py-1 px-3 bg-primary-subtle text-primary text-uppercase fw-semibold rounded-pill">
-                  <?php echo $card['department']; ?> </p>
-              </div>
-              <div class="d-flex gap-3">
-                <button class="btn btn-outline-info">
-                  <a href="process.php?id=<?php echo $card['id']?>">
-                    <i class="fa-regular fa-pen-to-square"></i>
-                  </a>
-                </button>
-                <form action="process.php" method="POST">
-                  <input type="hidden" name="delete_id" value="<?php echo $card['id']?>">
-                  <button type="submit" class="btn btn-danger rounded-circle" name="delete">
-                    <i class="fa-solid fa-trash text-light"></i>
-                  </button>
-                </form>
+      <div class="mt-5 mx-4">
+        <div class="row">
+          <div class="col-2 p-3 bg-primary rounded me-3">
+            <div class="text-white px-1 pt-1 d-flex flex-row align-items-center justify-content-between">
+              <p><i class="fa-solid fa-user-doctor " style="font-size: 3.5rem;"></i></p>
+              <div class="text-end">
+                <p class=" m-0 fs-2 fw-bold"><?php echo $all_doctor ?></p>
+                <span>All Doctors</span>
               </div>
             </div>
           </div>
-        </div>
-        <?php endforeach; ?>
-      </section>
-    </div>
-  </div>
-</div>
 
-<?php include '../inc/footer.php';?>
+          <div class="col-2 p-3 bg-success rounded me-3">
+            <div class="text-white p-1 d-flex flex-row align-items-center justify-content-between">
+              <p><i class="fa-solid fa-users" style="font-size: 3.5rem;"></i></p>
+              <div class="text-end">
+                <i class="fa-regular fa-users-medical"></i>
+                <p class=" m-0 fs-2 fw-bold"><?php echo $all_patients ?></p>
+                <span>All Patient</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-2 p-3 bg-info rounded me-3">
+            <div class="text-white p-1 d-flex flex-row align-items-center justify-content-between">
+              <p><i class="fa-solid fa-calendar-check" style="font-size: 3.5rem;"></i></p>
+              <div class="text-end">
+                <p class=" m-0 fs-2 fw-bold"><?php echo $book ?></p>
+                <span>Schedule Booked</span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-2 p-3 bg-danger rounded me-3">
+            <div class="text-white p-1 d-flex flex-row align-items-center justify-content-between">
+              <p><i class="fa-solid fa-rectangle-xmark" style="font-size: 3.5rem;"></i></p>
+              <div class="text-end">
+                <p class=" m-0 fs-2 fw-bold"><?php echo $cancel ?></p>
+                <span>Cancelled Appointment</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <?php include '../inc/footer.php';?>
