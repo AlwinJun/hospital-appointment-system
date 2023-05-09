@@ -42,6 +42,9 @@ $conn->close();
               <a href="dashboard.php" class="nav-link">Dashboard</a>
             </li>
             <li class="nav-item mb-3">
+              <a href="doctor-section.php" class="nav-link text-bg-emphasis ">Doctor</a>
+            </li>
+            <li class="nav-item mb-3">
               <a href="schedule.php" class="nav-link text-bg-emphasis text-white">Doctor Schedule</a>
             </li>
             <li class="nav-item">
