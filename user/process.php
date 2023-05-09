@@ -70,8 +70,8 @@ if(isset($_POST['submit_appointment'])){
   $description = $_POST['description'];
 
    if(!empty($doctor) && !empty($date) && !empty($time) && !empty($first_name) && !empty($last_name) && !empty($age) && !empty($address) && !empty($sex) && !empty($description) ){
-    $sql = "INSERT INTO patient(first_name,last_name,age,address,sex,doctor,date,time,description) 
-                        VAlUES('$first_name','$last_name ','$age','$address','$sex','$doctor','$date','$time','$description')";
+    $sql = "INSERT INTO patient(schedule_id,first_name,last_name,age,address,sex,doctor,date,time,description,status) 
+                        VAlUES('$sched_id','$first_name','$last_name ','$age','$address','$sex','$doctor','$date','$time','$description','Booked')";
 
     $result = $conn->query($sql);
 

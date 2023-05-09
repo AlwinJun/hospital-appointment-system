@@ -63,7 +63,7 @@ if(isset($_POST['submit_doctor'])){
         // die($sql . $conn->error);
       }
 
-      header('Location:dashboard.php');
+      header('Location:doctor-section.php');
       exit();
   }else{
      $_SESSION['message'] = '
@@ -149,14 +149,14 @@ if(isset($_POST['update_doctor'])){
       // die($sql . $conn->error);
     }
 
-    header('Location:dashboard.php');
+    header('Location:doctor-section.php');
     exit();
   }else{
     $_SESSION['message'] = '
         <div class="alert alert-warning text-center" role="alert">
           Update failed.Please fill out all input fields!
         </div>';
-    header('Location:dashboard.php');
+    header('Location:doctor-section.php');
     exit();
   } 
   $conn->close();
@@ -181,7 +181,7 @@ if(isset($_POST['delete'])){
         </div>';
       // die($sql . $conn->error);
   }
-  header('Location:dashboard.php');
+  header('Location:doctor-section.php');
   exit();
   $conn->close();
 }
@@ -254,4 +254,55 @@ if(isset($_POST['delete_sched'])){
   $conn->close();
 }
 
+// Cancelled Appointment
+if(isset($_POST['cancel'])){
+  $sched_id = $_POST['sched_id'];
+  $patient_id = $_POST['patient_id'];
+
+  $sched_sql = "UPDATE schedule SET status = 'Available' WHERE id = $sched_id";
+  $paient_sql = "UPDATE patient SET status = 'Cancelled'  WHERE id = $patient_id";
+
+  $result_sched =$conn->query($sched_sql);
+  $result_patient =$conn->query($paient_sql);
+
+  if($result_patient){
+    // do nothing
+  }else{
+    die($sql . $conn->error);
+  }
+
+  if($result_sched){
+    //do nothing
+  }else{
+    die($sql . $conn->error);
+  }
+
+    header('Location:patient.php');
+    exit();
+  $conn->close();
+}
+
+//Delete Patient
+if(isset($_POST['delete_patient'])){
+  $delete_id = $_POST['delete_id'];
+  $sql = "DELETE FROM patient WHERE id={$delete_id}";
+  $result =  $conn->query($sql);
+  if($result){
+    $_SESSION['message'] = '
+      <div class="alert alert-success py-3 alert-dismissible" role="alert">
+        <div>Patient data deleted successfully</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+    }else{
+      $_SESSION['message'] = '
+        <div class="alert alert-warning py-3 alert-dismissible" role="alert">
+          <div>Failed to delete patient data</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+      // die($sql . $conn->error);
+  }
+  header('Location:patient.php');
+  exit();
+  $conn->close();
+}
 ?>

@@ -36,6 +36,9 @@ $conn->close();
               <a href="dashboard.php" class="nav-link">Dashboard</a>
             </li>
             <li class="nav-item mb-3">
+              <a href="doctor-section.php" class="nav-link text-bg-emphasis ">Doctor</a>
+            </li>
+            <li class="nav-item mb-3">
               <a href="schedule.php" class="nav-link text-bg-emphasis">Doctor Schedule</a>
             </li>
             <li class="nav-item">
@@ -80,6 +83,7 @@ $conn->close();
                 <th scope="col">Doctor</th>
                 <th scope="col">Date-Time</th>
                 <th scope="col">Description</th>
+                <th scope="col">Status</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -97,10 +101,16 @@ $conn->close();
                   <?php echo date('F j, Y', strtotime($rows['date'])).'<br>'.date('g:i a', strtotime($rows['time'])); ?>
                 </td>
                 <td><?php echo $rows['description']; ?></td>
+                <td><?php echo $rows['status']; ?></td>
                 <td class="d-flex gap-2">
-                  <button class="btn btn-outline-info rounded-circle">
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                  </button>
+                  <form action="process.php" method="POST">
+                    <input type="hidden" name="patient_id" value="<?php echo $rows['id']?>">
+                    <input type="hidden" name="sched_id" value="<?php echo $rows['schedule_id']?>">
+                    <button class="btn" name="cancel">
+                      <a href="#"><i class="fa-solid fa-rectangle-xmark text-warning fs-2"></i></a>
+                    </button>
+                  </form>
+
                   <form action="process.php" method="POST">
                     <input type="hidden" name="delete_id" value="<?php echo $rows['id']?>">
                     <button class="btn btn-danger rounded-circle" name="delete_patient">
